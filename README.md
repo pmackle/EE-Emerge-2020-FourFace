@@ -1,7 +1,7 @@
 # EE-Emerge 2020: Four Face
 
 
-Our project uses capsense technology to create an touch sensitive multiplayer game cube. There will be 4 faces available to play the game on, allowing a maximum of 4 players. Each face will produce the same pattern at the start of the game. After a short amount of time, the pattern will disappear. The goal of this game is to reproduce the pattern correctly.  As the rounds progress, the patterns become more complicated and the time allotted to reenter the pattern will decrease.
+FourFace is a capacitive touch, four player interactive game in the vein of the 80's electronic game, "Simon".  The basic premise of the game is a pattern of lights will emit for each player that they will then have to replicate. If they guess incorrectly, they will be elimated. With each round the patterns will become increasingly complex.
 
 ## Table of Contents
 
@@ -31,7 +31,7 @@ Features:
 - 1-4 player game
 - Difficulty adjustment
 - Portable
-
+The mechanical design for the project is composed of a 15x15in cube with 9 acrylic tiles that face each player.
 
 Short motivation for the project? (Don't be too long winded)
 Put a creative, more modern spin on a similar, but older game. 
@@ -118,7 +118,7 @@ For help please contact one of the project [authors](#release-process).
 
 # Authors
 
-* [Patrick Mackle]
+* [Patrick Mackle](https://github.com/pmackle)
 * [Anthony Pham](https://github.com/AnthonysPham)
 * [Sophie Bolotin](https://github.com/sbolotin20)
 * [Noah Tarr]
