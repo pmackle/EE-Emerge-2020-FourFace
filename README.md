@@ -118,15 +118,15 @@ For help please contact one of the project [authors](#release-process).
 
 # Authors
 
-* Patrick Mackle
-* Anthony Pham
-* Sophie Bolotin
-* Noah Tarr
-* Vanessa Liera
-* Victoria Liera
-* Michelle Acoba
-* Christian Gonzalez
-* Sean Alling
+* [Patrick Mackle]
+* [Anthony Pham](https://github.com/AnthonysPham)
+* [Sophie Bolotin](https://github.com/sbolotin20)
+* [Noah Tarr]
+* [Vanessa Liera](https://github.com/vpliera)
+* [Victoria Liera](https://github.com/victorialiera)
+* [Michelle Acoba](https://github.com/maacoba)
+* [Christian Gonzalez](https://github.com/christian-ee-emerge)
+* [Sean Alling](https://github.com/oceanofthelost)
 
 **[Back to top](#table-of-contents)**
 
