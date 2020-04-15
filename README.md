@@ -121,7 +121,7 @@ For help please contact one of the project [authors](#release-process).
 * [Patrick Mackle](https://github.com/pmackle)
 * [Anthony Pham](https://github.com/AnthonysPham)
 * [Sophie Bolotin](https://github.com/sbolotin20)
-* [Noah Tarr]
+* [Noah Tarr](https://github.com/NoahTarr)
 * [Vanessa Liera](https://github.com/vpliera)
 * [Victoria Liera](https://github.com/victorialiera)
 * [Michelle Acoba](https://github.com/maacoba)
