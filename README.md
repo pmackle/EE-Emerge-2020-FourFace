@@ -23,8 +23,6 @@ FourFace is a capacitive touch, four player interactive game in the vein of the 
 
 # About the Project
 
-Here you can provide more details about the project
-What features does your project provide?
 Features:
 - CapSense Technology
 - Custom PCB's
@@ -33,7 +31,6 @@ Features:
 - Portable
 The mechanical design for the project is composed of a 15x15in cube with 9 acrylic tiles that face each player.
 
-Short motivation for the project? (Don't be too long winded)
 Put a creative, more modern spin on a similar, but older game. 
 
 * Links to the project site
