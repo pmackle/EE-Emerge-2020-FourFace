@@ -6,18 +6,11 @@ FourFace is a capacitive touch, four player interactive game in the vein of the 
 ## Table of Contents
 
 1. [About the Project](#about-the-project)
-1. [Project Status](#project-status)
 1. [Getting Started](#getting-started)
     1. [Dependencies](#dependencies)
     1. [Building](#building)
     1. [Installation](#installation)
-    1. [Usage](#usage)
-1. [Release Process](#release-process)
-    1. [Versioning](#versioning)
-    1. [Payload](#payload)
 1. [How to Get Help](#how-to-get-help)
-1. [Further Reading](#further-reading)
-1. [Contributing](#contributing)
 1. [Authors](#authors)
 1. [Acknowledgements](#acknowledgements)
 
@@ -38,25 +31,14 @@ Features:
 - Portable
 The mechanical design for the project is composed of a 15x15in cube with 9 acrylic tiles that face each player.
 
-Short motivation for the project? (Don't be too long winded)
-Put a creative, more modern spin on a similar, but older game. 
+Our motivation for the project was to put a creative, more modern spin on a similar, but older game. We wanted to use our engineering skills to bring a faint idea into a reality by overseeing it through the whole product lifecycle. 
 
-* Links to the project site
+[Our Hackster.io website](https://www.hackster.io/fourface/fourface-1bf273)
 
 ```
 Show some example code to describe what your project does
 Show some of your APIs
 ```
-
-**[Back to top](#table-of-contents)**
-
-# Project Status
-
-Show the build status if you have a CI server:
-
-[![Build Status](http://your-server:12345/job/badge/icon)](http://your-server:12345/job/http://your-server:12345/job/badge/icon/)
-
-Describe the current release and any notes about the current state of the project. Examples: currently compiles on your host machine, but is not cross-compiling for ARM, APIs are not set, feature not implemented, etc.
 
 **[Back to top](#table-of-contents)**
 
@@ -76,10 +58,10 @@ Segger J-Link support can be added for MSP432, but is not required.
 
 ## Getting the Source
 
-This project is [hosted on GitHub](hhttps://github.com/oceanofthelost/EE-Emerge2020-FourFace). You can clone this project directly using this command:
+This project is [hosted on GitHub](hhttps://github.com/pmackle/EE-Emerge2020-FourFace). You can clone this project directly using this command:
 
 ```
-git clone https://github.com/oceanofthelost/EE-Emerge2020-FourFace
+git clone https://github.com/pmackle/EE-Emerge2020-FourFace
 ```
 
 This will create a new root folder "EE-Emerge2020-FourFace" that will contain all projects for Four Face.
@@ -107,11 +89,6 @@ Instructions for how to build your project
 ```
 Examples should be included
 ```
-## Flashing
-
-If you have formatting checks, coding style checks, or static analysis tests that must pass before changes will be considered, add a section for those and provide instructions
-
-
 
 **[Back to top](#table-of-contents)**
 
@@ -123,21 +100,22 @@ For help please contact one of the project [authors](#release-process).
 
 # Authors
 
-* [Patrick Mackle](https://github.com/pmackle)
-* [Anthony Pham](https://github.com/AnthonysPham)
-* [Sophie Bolotin](https://github.com/sbolotin20)
-* [Noah Tarr](https://github.com/NoahTarr)
-* [Vanessa Liera](https://github.com/vpliera)
-* [Victoria Liera](https://github.com/victorialiera)
-* [Michelle Acoba](https://github.com/maacoba)
-* [Christian Gonzalez](https://github.com/christian-ee-emerge)
-* [Sean Alling](https://github.com/oceanofthelost)
+* [Patrick Mackle](https://github.com/pmackle) - Team Leader, Mechanical Design
+* [Anthony Pham](https://github.com/AnthonysPham) - Assembly
+* [Sophie Bolotin](https://github.com/sbolotin20) - Website Design
+* [Noah Tarr](https://github.com/NoahTarr) - Software
+* [Vanessa Liera](https://github.com/vpliera) - Assembly
+* [Victoria Liera](https://github.com/victorialiera) - Assembly
+* [Michelle Acoba](https://github.com/maacoba) - Assembly, Website Design
+* [Christian Gonzalez](https://github.com/christian-ee-emerge) - Mechanical Design
+* [Sean Alling](https://github.com/SeanAlling) - Class TA
 
 **[Back to top](#table-of-contents)**
 
 # Acknowledgments
 
-UC Davis
-Texas Instruments
-
+UC Davis for giving us the opportunity to work together
+Texas Instruments for sponsoring and allowing for FourFace to even become a reality
+Professor Andre Knoesen for guiding us throught the big picture of our project
+Sean Alling for making sure we did not drive ourselves insane by keeping us focused on achievable goals
 **[Back to top](#table-of-contents)**
