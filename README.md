@@ -115,6 +115,7 @@ For help please contact one of the project [authors](#release-process).
 
 # Acknowledgments
 
-UC Davis for giving us the opportunity to work together & Texas Instruments for sponsoring and allowing for FourFace to even become a reality
+UC Davis for giving us the opportunity to work together & Texas Instruments for sponsoring and allowing for FourFace to even become a reality.
+A huge thank you to our professor Andre Knoessen and TA Sean Alling for their guidance in helping us stay on track with our goals and keep our sight on the big picture. 
 
 **[Back to top](#table-of-contents)**
