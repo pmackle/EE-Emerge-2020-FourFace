@@ -100,14 +100,14 @@ For help please contact one of the project [authors](#release-process).
 
 # Authors
 
-* [Patrick Mackle](https://github.com/pmackle) - *Team Leader, Mechanical Design*
-* [Anthony Pham](https://github.com/AnthonysPham) - *Assembly*
+* [Patrick Mackle](https://github.com/pmackle) - *Team Leader, Mechanical Design, Fabrication*
+* [Anthony Pham](https://github.com/AnthonysPham) - *Fabrication*
 * [Sophie Bolotin](https://github.com/sbolotin20) - *Website Design*
-* [Noah Tarr](https://github.com/NoahTarr) - *Software*
-* [Vanessa Liera](https://github.com/vpliera) - *Assembly*
-* [Victoria Liera](https://github.com/victorialiera) - *Assembly*
-* [Michelle Acoba](https://github.com/maacoba) - *Assembly, Website Design*
-* [Christian Gonzalez](https://github.com/christian-ee-emerge) - *Mechanical Design*
+* [Noah Tarr](https://github.com/NoahTarr) - *Software Design*
+* [Vanessa Liera](https://github.com/vpliera) - *Fabrication*
+* [Victoria Liera](https://github.com/victorialiera) - *Fabrication*
+* [Michelle Acoba](https://github.com/maacoba) - *Fabrication, Website Design*
+* [Christian Gonzalez](https://github.com/christian-ee-emerge) - *Hardware & Mechanical Design, Fabrication*
 * [Sean Alling](https://github.com/SeanAlling) - *Class TA*
 * Andre Knoesen- *Professor*
 
