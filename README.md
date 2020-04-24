@@ -22,6 +22,7 @@ FourFace is a capacitive touch, four player interactive game in the vein of the 
 1. [Acknowledgements](#acknowledgements)
 
 # About the Project
+    FourFace is interactive memory game created by undergraduates from EE-Emerge, a group within the Department of Electrical and Computer Engineering at the University of California, Davis. The premise of this game is to compete against three other people and imitate the given pattern. As each round starts, the pattern becomes increasingly difficult. Once a person fails to imitate the given pattern, they will be eliminated. Last person to survive the remaining rounds is crowned the winner. Some highlights worth mentioning are CapSense technology, custom PCB's and mechanical design, and user friendliness.
 
 Here you can provide more details about the project
 What features does your project provide?
