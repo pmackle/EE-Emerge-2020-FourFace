@@ -100,26 +100,21 @@ For help please contact one of the project [authors](#release-process).
 
 # Authors
 
-* [Patrick Mackle](https://github.com/pmackle) - Team Leader, Mechanical Design
-* [Anthony Pham](https://github.com/AnthonysPham) - Assembly
-* [Sophie Bolotin](https://github.com/sbolotin20) - Website Design
-* [Noah Tarr](https://github.com/NoahTarr) - Software
-* [Vanessa Liera](https://github.com/vpliera) - Assembly
-* [Victoria Liera](https://github.com/victorialiera) - Assembly
-* [Michelle Acoba](https://github.com/maacoba) - Assembly, Website Design
-* [Christian Gonzalez](https://github.com/christian-ee-emerge) - Mechanical Design
-* [Sean Alling](https://github.com/SeanAlling) - Class TA
+* [Patrick Mackle](https://github.com/pmackle) - *Team Leader, Mechanical Design*
+* [Anthony Pham](https://github.com/AnthonysPham) - *Assembly*
+* [Sophie Bolotin](https://github.com/sbolotin20) - *Website Design*
+* [Noah Tarr](https://github.com/NoahTarr) - *Software*
+* [Vanessa Liera](https://github.com/vpliera) - *Assembly*
+* [Victoria Liera](https://github.com/victorialiera) - *Assembly*
+* [Michelle Acoba](https://github.com/maacoba) - *Assembly, Website Design*
+* [Christian Gonzalez](https://github.com/christian-ee-emerge) - *Mechanical Design*
+* [Sean Alling](https://github.com/SeanAlling) - *Class TA*
+* Andre Knoesen- *Professor*
 
 **[Back to top](#table-of-contents)**
 
 # Acknowledgments
 
-UC Davis for giving us the opportunity to work together
-
-Texas Instruments for sponsoring and allowing for FourFace to even become a reality
-
-Professor Andre Knoesen for guiding us throught the big picture of our project
-
-Sean Alling for making sure we did not drive ourselves insane by keeping us focused on achievable goals
+UC Davis for giving us the opportunity to work together & Texas Instruments for sponsoring and allowing for FourFace to even become a reality
 
 **[Back to top](#table-of-contents)**
