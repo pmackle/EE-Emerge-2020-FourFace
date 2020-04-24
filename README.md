@@ -8,8 +8,8 @@ FourFace is a capacitive touch, four player interactive game in the vein of the 
 1. [About the Project](#about-the-project)
 1. [Getting Started](#getting-started)
     1. [Dependencies](#dependencies)
-    1. [Building](#building)
     1. [Installation](#installation)
+    1. [Building](#building)
 1. [How to Get Help](#how-to-get-help)
 1. [Authors](#authors)
 1. [Acknowledgements](#acknowledgements)
@@ -115,7 +115,11 @@ For help please contact one of the project [authors](#release-process).
 # Acknowledgments
 
 UC Davis for giving us the opportunity to work together
+
 Texas Instruments for sponsoring and allowing for FourFace to even become a reality
+
 Professor Andre Knoesen for guiding us throught the big picture of our project
+
 Sean Alling for making sure we did not drive ourselves insane by keeping us focused on achievable goals
+
 **[Back to top](#table-of-contents)**
