@@ -1,0 +1,4 @@
+This project will need four Texas Instruments' MSP430 and one MSP432 launchpad. To program these microcontrollers, we will 
+be using Texas Instrument Code Composer Studio. In order to communicate between the master launchpad to the four face microcontroller,
+we will be using Universal Asynchronous Receiver/Transmitter (UART) Communication. 
+The 
