@@ -1,4 +1,9 @@
 This project will need four Texas Instruments' MSP430 and one MSP432 launchpad. To program these microcontrollers, we will 
 be using Texas Instrument Code Composer Studio. In order to communicate between the master launchpad to the four face microcontroller,
 we will be using Universal Asynchronous Receiver/Transmitter (UART) Communication. 
-The 
+Overview of the Code:
+The Master and faces will start up and initilize the game and players. The players will then have to ready up by touching the 
+middle panel of the frame. Once readied up, the master will send a random pattern to each frame. The player will memorise the pattern
+and imitate the pattern. If the pattern is incorrect, then the player will get eliminated. However, if the player manage to replicate it,
+then the player goes onto the next round. There is two ways the game will end: three out of the four players gets eliminated or the 
+predetermined set of rounds get completed before elimination occurs. 
