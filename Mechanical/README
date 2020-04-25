@@ -1,12 +1,14 @@
-The overall design of the of the project is a cube, where each of the four adjacent sides make up the frames. Within each frame, there are 
-nine acrylic panels with capacitive sensing technology, ultimately acting as a "touch screen." Each frame has four layers, each 
-having a specific mechanical function. The acrylic panel sits on top of the first layer and the first layer is directly above the
-second layer. The first and second layer act in conjunction with each other by creating a stable configuration for the panel, which is the
-layer above, to sit evenly on the first layer. Because the acrylic panel has the same dimensions as the first layer, without the second
-layer being slightly larger, the panels would be unable to be securely stacked. The next layer has a specific thickness of half an inch,
-which is the width the the LED strip we will be using. The LED strip will run along the square cutouts. The final layer allows wiring 
-management. Once one frame is done, you have to do the same procedure three more times. Now once all four frames are done, you can assemble
-the four face together. 
+The software app we will be using to cad the design is AutoDesk Fusion 360. A laser cutter is needed to cut the wood sheets for the 
+mechanical design. If you do no have a laser cutter, a box cutter will do. 
+The overall design of the of the project is a cube, where each of the four adjacent sides make up the frames. Each frame will have a 
+dimension of 15x15 inch. Within each frame, there are nine 4x4 inch acrylic panels with capacitive sensing technology, ultimately acting
+as a "touch screen." Each frame has four layers, each having a specific mechanical function. The acrylic panel sits on top of the first
+layer and the first layer is directly above thesecond layer. The first and second layer act in conjunction with each other by creating 
+a stable configuration for the panel, which is the layer above, to sit evenly on the first layer. Because the acrylic panel has the same 
+dimensions as the first layer, without the second layer being slightly larger, the panels would be unable to be securely stacked. The next
+layer has a specific thickness of half an inch, which is the width the the LED strip we will be using. The LED strip will run along the 
+square cutouts. The final layer allows wiring management. Once one frame is done, you have to do the same procedure three more times.
+Now once all four frames are done, you can assemble the four face together. 
 
 - dowel
 - connector
