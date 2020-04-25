@@ -1,0 +1,6 @@
+The overall design of the of the project is a cube, where each of the four adjacent sides make up the frames. Within each frame, there are 
+nine acrylic panels with capacitive sensing technology, ultimately acting as a "touch screen." Each frame has four layers, each 
+having a specific mechanical function. The acrylic panel sits on top of the first layer and the first layer is directly above the
+second layer. The first and second layer act in conjunction with each other by creating a stable configuration for the panel, which is the
+layer above, to sit evenly on the first layer. Because the acrylic panel has the same dimensions as the first layer, without the second
+layer being slightly larger, the panels would be unable to be securely stacked.
