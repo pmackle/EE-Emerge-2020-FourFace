@@ -101,7 +101,7 @@ For help please contact one of the project [authors](#release-process).
 # Authors
 
 * [Patrick Mackle](https://github.com/pmackle) - *Team Leader, Mechanical Design, Fabrication*
-* [Anthony Pham](https://github.com/AnthonysPham) - *Fabrication*
+* [Anthony Pham](https://github.com/AnthonysPham) - *Mechanical Design, Fabrication*
 * [Sophie Bolotin](https://github.com/sbolotin20) - *Website Design*
 * [Noah Tarr](https://github.com/NoahTarr) - *Software Design*
 * [Vanessa Liera](https://github.com/vpliera) - *Fabrication*
