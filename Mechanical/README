@@ -16,7 +16,7 @@ surrounding the perimeter. A wire is then soldered onto the copper tape so that 
 PCB. This will act as a parallel plate while the person's hand will act as the other parallel plate. When the person makes contact with
 the acrylic plate, the capacitance will change. If this change passes a certain threshold, the PCB will activate the LED strips.
   There are additional designs that makes the project look cleaner. One of the aesthetic choices is four wooden rectangular dowels. When
-the four faces are assembled, the outside corners do not align with each other. By using the dowels, we cna make eacch face flush with 
+the four faces are assembled, the outside corners do not align with each other. By using the dowels, we cna make each face flush with 
 each other. Another design choice is having a base and tower underneath the four faces. The tower will be a rectangular box that connects 
 the four faces and the base. This will also give the game some height, allowing the players to stand when imitating the pattern. The base 
 will be a simple box that houses the power supply. 
