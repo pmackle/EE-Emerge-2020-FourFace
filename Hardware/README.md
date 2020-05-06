@@ -6,4 +6,5 @@ Maker.
 connected to the face launchpad. Along with the nine capsense acylic panels, the numbers of connections needed became 18 wires plus a 
 communication wire, bring the total to 19 wires. However, The MSP430 do not support this many connections. With this in mind, we created 
 our PCBs. 
-  The main assignment of the face PCBs is to read whether the capsense is activated. If the PCB detects a change in capacitance, then the PCB will be able to communicate with the Master PCB. 
+  The main job of the face PCBs is to read whether the capsense is activated. If the PCB detects a change in capacitance, then the 
+PCB will be able to communicate with the Master PCB through UART. 
