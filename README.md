@@ -1,7 +1,7 @@
 ---
 title: Readme
 layout: template
-filename: README.md
+filename: README
 --- 
 
 # EE-Emerge 2020: Four Face
