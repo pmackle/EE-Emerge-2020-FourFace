@@ -1,7 +1,7 @@
 # EE-Emerge 2020: Four Face
 
 
-!FourFace is a capacitive touch, four player interactive game in the vein of the 80's electronic game, "Simon".  The basic premise of the game is a pattern of lights will emit for each player that they will then have to replicate. If they guess incorrectly, they will be eliminated. With each round the patterns will become increasingly complex.
+FourFace is a capacitive touch, four player interactive game in the vein of the 80's electronic game, "Simon".  The basic premise of the game is a pattern of lights will emit for each player that they will then have to replicate. If they guess incorrectly, they will be eliminated. With each round the patterns will become increasingly complex.
 
 ## Table of Contents
 
