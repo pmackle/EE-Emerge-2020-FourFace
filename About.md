@@ -5,4 +5,4 @@ filename: About.md
 --- 
 
 
-This is the about page
+FourFace is a project developed for EE-Emerge during the 2019/2020 academic year.
