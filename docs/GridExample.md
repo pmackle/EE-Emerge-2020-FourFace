@@ -1,5 +1,5 @@
 ---
-title: FourFace
+title: GridExample
 layout: template
 filename: GridExample
 --- 
