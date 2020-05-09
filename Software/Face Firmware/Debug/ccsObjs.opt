@@ -1,1 +1,0 @@
-"./Source/CTS_HAL.o" "./Source/CTS_Layer.o" "./Source/main.o" "./Source/structure.o" "./Source/ws2812.o" -T"../msp430g2553.ld" -T"../Source/msp430g2553.ld" -Wl,--start-group -lgcc -lc -Wl,--end-group 
