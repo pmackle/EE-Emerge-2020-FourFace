@@ -7,6 +7,6 @@ filename: GridExample
 
 | | | |
 |:-------------------------:|:-------------------------:|:-------------------------:|
-|<img width="1604" src="https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/docs/Images/A.png"?raw=true>  This is an A1 |  <img width="1604" src="https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/docs/Images/B.png"?raw=true> This is a B1 | <img width="1604" src="https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/docs/Images/C.png"?raw=true>  This is a C1|
-|<img width="1604" src="https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/docs/Images/A.png"?raw=true>  This is an A2 |  <img width="1604" src="https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/docs/Images/B.png"?raw=true> This is a B2 | <img width="1604" src="https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/docs/Images/C.png"?raw=true> This is a C2|
-|<img width="1604" src="https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/docs/Images/A.png"?raw=true>  This is an A3 |  <img width="1604" src="https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/docs/Images/B.png"?raw=true> This is a B3 | <img width="1604" src="https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/docs/Images/C.png"?raw=true>  This is a C3|
+| ![This is an A1](/docs/Images/A.png) test a1 | ![This is a B1](/docs/Images/B.png) test b1 | ![This is a C1](/docs/Images/C.png) test c1|
+| ![This is an A2](/docs/Images/A.png) test a2 | ![This is a B2](/docs/Images/B.png) test b2 | ![This is a C2](/docs/Images/C.png) test c2|
+| ![This is an A3](/docs/Images/A.png) test a3 | ![This is a B3](/docs/Images/B.png) test b3 | ![This is a C3](/docs/Images/C.png) test c3|
