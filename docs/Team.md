@@ -10,10 +10,7 @@ filename: Team
 
 | | | |
 |:-------------------------:|:-------------------------:|:-------------------------:|
-| ![Patrick Mackle](https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/docs/Images/B.png?raw=true)
-**Team Leader** 
-Electrical Engineering Major| 
-![This is a B1](https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/docs/Images/A.png?raw=true) test b1 | ![This is a C1](https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/docs/Images/C.png?raw=true)|
-| ![This is an A2](https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/docs/Images/B.png?raw=true) | ![This is a B2](https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/docs/Images/A.png?raw=true) test b2 | ![This is a C2](https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/docs/Images/C.png?raw=true)|
-| ![This is an A3](https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/docs/Images/B.png?raw=true) | ![This is a B3](https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/docs/Images/A.png?raw=true) test b3 | ![This is a C3](https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/docs/Images/C.png?raw=true)|
+| ![Patrick Mackle](https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/docs/Images/B.png?raw=true) **Team Leader** Computer and Electrical Engineering Major| ![Michelle Acoba](https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/docs/Images/A.png?raw=true) Electrical Engineering Major | ![Sophie Bolotin](https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/docs/Images/C.png?raw=true) Computer Science and Engineering Major |
+| ![Christian Gonzalez](https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/docs/Images/B.png?raw=true) Electrical Engineering Major| ![Vanessa Liera](https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/docs/Images/A.png?raw=true) Electrical Engineering Major | ![Victoria Liera](https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/docs/Images/C.png?raw=true)Electrical Engineering Major |
+| ![This is an A3](https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/docs/Images/B.png?raw=true) | ![Anthony Pham](https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/docs/Images/A.png?raw=true) Electrical Engineering Major | ![Noah Tarr](https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/docs/Images/C.png?raw=true) Computer Engineering Major|
 
