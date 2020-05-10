@@ -64,7 +64,7 @@ void setup() {
     Serial1.begin(9600); 
     establishContact(); // send a byte to establish contact until receiver responds 
     
-    startGame(5, 2);
+    startGame(5, 5);
     player1 = (Player*)malloc(sizeof(Player));
     player2 = (Player*)malloc(sizeof(Player));
     player3 = (Player*)malloc(sizeof(Player));
@@ -80,8 +80,7 @@ void setup() {
 //////////////////////////////
 int i = 0;
 void loop() {
-    sizePatternArray = game.initialSquareCount + game.crntRound;
-    pattern = newRound(sizePatternArray);
+    displayPattern(generatePattern(6), 6);
 }
 
 

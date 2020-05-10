@@ -1,7 +1,6 @@
 #include <msp430.h>
 #include "ws2812.h"
 
-#include <msp430g2553.h>
 #include <stdint.h>
 #include "structure.h"
 #include "CTS_Layer.h"
@@ -37,14 +36,6 @@ typedef enum  ledStripPins
     NUM_SQUARES
 } squareNames;
 
-////////////////////////////////////////
-//SQUARE NUMBER LAYOUT BASED ON WIRING
-////////////////////////////////////////
-//  G | F | E  |  6 | 5 | 4
-//  ---------  |  ---------
-//  H | C | D  |  7 | 2 | 3
-//  ---------  |  ---------
-//  I | B | A  |  8 | 1 | 0
 
 uint8_t square = 0;
 uint8_t color = 0;
@@ -84,68 +75,68 @@ int main(void)
     __bis_SR_register(GIE);
 
 
-    InitCapSenseButtons();
+    // InitCapSenseButtons();
     initStrip();  // ***** HAVE YOU SET YOUR NUM_LEDS DEFINE IN WS2812.H? ******
-
-
     fillStrip(COLOR_BLUE);
     showStrip();
+
     int byteReceived = 0;
     while (!byteReceived) {
         if (uart_getchar() == 'A') {
             uart_putchar('A');
             byteReceived = 1;
-             __delay_cycles(10 * DELAY_100ms);
-             fillStrip(COLOR_OFF);
-             showStrip();
+            // __delay_cycles(10 * DELAY_100ms);
+            // fillStrip(COLOR_OFF);
+            // showStrip();
         }
     }
 
     uint16_t capTouchValue = 0x0;
     while (1)
     {
-        capTouchValue = runCapTouch();
-        if (capTouchValue != 0x0) {
-            fillStrip(COLOR_GREEN);
-            showStrip();
-            __delay_cycles(50 * DELAY_100ms);
-        }
+        // capTouchValue = runCapTouch();
+        // if (capTouchValue != 0x0) {
+        //     fillStrip(COLOR_GREEN);
+        //     showStrip();
+        //     __delay_cycles(50 * DELAY_100ms);
+        // }
         
-        //Receive 2 bytes from master designating square and color.
-        //First it receives the square, loops again and receives the color.
-         if(uart_getchar() != -1)
-         {
-             if((state == 0) && !flag)
-             {
-                 square = UCA0RXBUF  - '0';
-                 state = 1;
-             }
-             else if((state == 1) && !flag)
-             {
-                 color = UCA0RXBUF  - '0';
-                 state = 0;
+        if(uart_getchar() != -1)
+        {
+            if((state == 0) && !flag)
+            {
+                square = UCA0RXBUF  - '0';
+                state = 1;
+            }
+            else if((state == 1) && !flag)
+            {
+                color = UCA0RXBUF  - '0';
+                state = 0;
                 
-                 switch(color)
-                 {
-                 case 0:
-                     setColorsShowStrip(square, COLOR_OFF);
-                     break;
-                 case 1:
-                     setColorsShowStrip(square, COLOR_RED);
-                     break;
-                 case 2:
-                     setColorsShowStrip(square, COLOR_GREEN);
-                     break;
-                 default:
-                     setColorsShowStrip(square, COLOR_BLUE);
-                 }
-                 flag = 0;
-                 __delay_cycles(10 * DELAY_100ms);
-                 //Send 'A' back to master signifying it is done displaying the square.
-                 //The master will not continue sending data until it receives this char.
-                 uart_putchar('A');
-             }
-         }
+                switch(color)
+                {
+                case 0:
+                    setColorsShowStrip(square, COLOR_OFF);
+                    break;
+                case 1:
+                    setColorsShowStrip(square, COLOR_RED);
+                    break;
+                case 2:
+                    setColorsShowStrip(square, COLOR_GREEN);
+                    break;
+                default:
+                    setColorsShowStrip(square, COLOR_BLUE);
+                }
+                flag = 0;
+                __delay_cycles(10 * DELAY_100ms);
+                uart_putchar('A');
+            }
+            else
+            {
+                trash = UCA0RXBUF;
+                // Do nothing. ignore byte
+            }
+        }
 
     }
 }
@@ -156,7 +147,6 @@ void setColorsShowStrip(uint8_t square, ColorMap color)
 {
     clearStrip();
     ColorMap currentColor = COLOR_OFF;
-    //Toggle passed square
     litSquares[square] = !litSquares[square];
     int k = 0;
     for (int i = 0; i < NUM_SQUARES; i++) {
@@ -240,21 +230,21 @@ void InitCapSenseButtons(void)
     // Init each of the cap sense sensor. 
     TI_CAPT_Init_Baseline(&buttonSensor0);       // Establish baseline
     TI_CAPT_Update_Baseline(&buttonSensor0, 10); // Average 10 baseline measurements
-    TI_CAPT_Init_Baseline(&buttonSensor1);
-    TI_CAPT_Update_Baseline(&buttonSensor1, 10);
-    TI_CAPT_Init_Baseline(&buttonSensor2);
-    TI_CAPT_Update_Baseline(&buttonSensor2, 10);
-    TI_CAPT_Init_Baseline(&buttonSensor3);
+    TI_CAPT_Init_Baseline(&buttonSensor1);       // Establish baseline
+    TI_CAPT_Update_Baseline(&buttonSensor1, 10); // Average 10 baseline measurements
+    TI_CAPT_Init_Baseline(&buttonSensor2);       // Establish baseline
+    TI_CAPT_Update_Baseline(&buttonSensor2, 10); // Average 10 baseline measurements
+    TI_CAPT_Init_Baseline(&buttonSensor3);       // Establish baseline
     TI_CAPT_Update_Baseline(&buttonSensor3, 10);
-    TI_CAPT_Init_Baseline(&buttonSensor4);
+    TI_CAPT_Init_Baseline(&buttonSensor4);       // Establish baseline
     TI_CAPT_Update_Baseline(&buttonSensor4, 10);
-    TI_CAPT_Init_Baseline(&buttonSensor5);
+    TI_CAPT_Init_Baseline(&buttonSensor5);       // Establish baseline
     TI_CAPT_Update_Baseline(&buttonSensor5, 10);
-    TI_CAPT_Init_Baseline(&buttonSensor6);
+    TI_CAPT_Init_Baseline(&buttonSensor6);       // Establish baseline
     TI_CAPT_Update_Baseline(&buttonSensor6, 10);
-    TI_CAPT_Init_Baseline(&buttonSensor7);
+    TI_CAPT_Init_Baseline(&buttonSensor7);       // Establish baseline
     TI_CAPT_Update_Baseline(&buttonSensor7, 10);
-    TI_CAPT_Init_Baseline(&buttonSensor8);
+    TI_CAPT_Init_Baseline(&buttonSensor8);       // Establish baseline
     TI_CAPT_Update_Baseline(&buttonSensor8, 10);
     TI_CAPT_Update_Tracking_Rate(TRIDOI_VSLOW | TRADOI_FAST);   // Set baseline update rate to VSLOW in direction of interest
 }
