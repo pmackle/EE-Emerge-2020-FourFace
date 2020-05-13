@@ -6,10 +6,6 @@ filename: Team
 
 
 # Meet Our Team
-<p align="center"> 
-<img src="https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/Documentation/Photos/team.png" width="500">
-</p>
-
 <p align="center">
   <img width="500" src="https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/Documentation/Photos/team.png/500">
 </p>
