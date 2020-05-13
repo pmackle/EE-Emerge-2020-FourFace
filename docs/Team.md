@@ -7,8 +7,7 @@ filename: Team
 
 # Meet Our Team
 ![Frame!](https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/Documentation/Photos/team.png?raw=true)
-
-![Test!](https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/docs/Images/C.png?raw=true)
+<img src="https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/Documentation/Photos/team.png" width="48">
 
 
 | | | |
