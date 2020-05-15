@@ -6,11 +6,19 @@ filename: Team
 
 
 # Meet Our Team
+<div markdown="1">
 <p align="center"> 
 <img src="https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/Documentation/Photos/team.png" width="500">
 </p>
+</div>
 
+
+<div markdown="1">
+<p align="center">
   EE-Emerge is part of the Department of Electrical and Computer Engineering at the University of California, Davis. Within a year, sophomores and juniors conceive, design, and build an interactive electronic system and present it at the UCD Picnic Day and the Bay Area Maker Faire. Texas Instruments sponsors EE-Emerge.
+</p>
+</div>
+  
 
 
 
