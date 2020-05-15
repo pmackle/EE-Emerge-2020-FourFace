@@ -5,13 +5,10 @@ filename: Project
 --- 
 
 # FourFace 
-<div markdown="1">
-<div style="color:blue;">
-FourFace integrates capacitive touch sensing into a four-player interactive game in the vein of the 80's electronic game, "Simon". In the game, a pattern of lights emits for each player that they have to replicate. If they guess incorrectly, the player is eliminated. With each round, the patterns become increasingly complex.                                                                                                                        
-</div>
-</div>
+FourFace integrates capacitive touch sensing into a four-player interactive game in the vein of the 80's electronic game, "Simon". In the game, a pattern of lights emits for each player that they have to replicate. If they guess incorrectly, the player is eliminated. With each round, the patterns become increasingly complex.                                               
 
 <div markdown="1">
+<div style="align:center;">
 <table>
   <tbody>
   <table border="0">
@@ -47,6 +44,7 @@ FourFace integrates capacitive touch sensing into a four-player interactive game
     </table>
   </tbody>
 </table>
+</div>
 </div>
 
 
