@@ -8,11 +8,7 @@ filename: Team
 # Meet Our Team
 
 
-<div markdown="1">
-<p align="center"> 
-<img src="https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/Documentation/Photos/team.png">
-</p>
-</div>
+![Test!](https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/Documentation/Photos/team.png?raw=true)
 
 
 <div markdown="1">
