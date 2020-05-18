@@ -9,12 +9,6 @@ FourFace integrates capacitive touch sensing into a four-player interactive game
 
 ![test!](https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/Documentation/Photos/not.png?raw=true)
 
-1. Mechanical Design 
-
-2. Software Design 
-
-3. Capacitive Touch 
-
 ## Mechanical Design
 
 Our vision of the mechanical design is a cube where the four adjacent sides act as the interface, allowing a maximum of four players. We use Autodesk Fusion 360 to visualize the framework, enabling us to create a rough and final prototype of the desired design.
