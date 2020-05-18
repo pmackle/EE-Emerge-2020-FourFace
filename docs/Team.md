@@ -8,7 +8,7 @@ filename: Team
 # Meet Our Team
 
 
-![Test!](https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/Documentation/Photos/team.png?raw=true)
+![Test!](https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/Documentation/Photos/team%20copy.png?raw=true)
 
 
 <div markdown="1">
