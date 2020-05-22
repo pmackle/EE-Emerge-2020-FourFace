@@ -13,7 +13,7 @@ filename: Team
 
 <div markdown="1">
 <p align="center">
-  EE-Emerge is part of the Department of Electrical and Computer Engineering at the University of California, Davis. Within a year, sophomores and juniors conceive, design, and build an interactive electronic system and present it at the UCD Picnic Day and the Bay Area Maker Faire. Texas Instruments sponsors EE-Emerge.
+  EE-Emerge is part of the Department of Electrical and Computer Engineering at the University of California, Davis. Within a year, sophomores and juniors conceive, design, and build an interactive electronic system. Texas Instruments sponsors EE-Emerge.
 </p>
 </div>
   
