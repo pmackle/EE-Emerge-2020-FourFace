@@ -1,0 +1,1 @@
+"./Source/CTS_HAL.obj" "./Source/CTS_Layer.obj" "./Source/main.obj" "./Source/structure.obj" "./Source/ws2812.obj" "../lnk_msp430g2533.cmd" -llibc.a 

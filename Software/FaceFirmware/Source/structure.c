@@ -49,7 +49,7 @@
  * Rev 1.0
  *
  */
-//1.0, 1.2, 1.4, 1.5, 2.1 2.2, 2.4, 1.6, 2.7
+//1.0, 2.6, 1.4, 1.5, 2.1 2.2, 2.4, 1.6, 2.7
 //Changing 1.2 to 1.3 b/c 1.2 is being used for UART communication
 #include "structure.h"
 
@@ -67,9 +67,9 @@ const struct Element buttonElement0 =
 
 const struct Element buttonElement1 =
 {
-    .inputBits = BIT3,
-    .inputPxselRegister = (unsigned char *)&P1SEL,
-    .inputPxsel2Register = (unsigned char *)&P1SEL2,
+    .inputBits = BIT6,
+    .inputPxselRegister = (unsigned char *)&P2SEL,
+    .inputPxsel2Register = (unsigned char *)&P2SEL2,
     .threshold = THRESHOLD
 
 };

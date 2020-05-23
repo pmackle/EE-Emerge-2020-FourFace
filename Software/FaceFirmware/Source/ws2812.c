@@ -100,7 +100,8 @@ void showStrip()
     __bic_SR_register(GIE);
     uint8_t *rgb = 0;
     // send RGB color for every LED
-    for (uint32_t i = 0; i < NUM_LEDS; i++) 
+    uint32_t i = 0;
+    for (; i < NUM_LEDS; i++)
     {
         /*
             Create a pointer to the led color codes in memory. 
@@ -125,7 +126,8 @@ void showStrip()
         rgb = (uint8_t *)&ColorMapValues[((leds[i/4]>>(2*(i%4)))&0x03)]; // get GRB color for this LED
 
         // send green, then red, then blue
-        for (uint32_t j = 0; j < 3; j++)
+        uint32_t j = 0;
+        for (; j < 3; j++)
         {
             uint8_t mask = 0x80;    // b1000000
             // check each of the 8 bits
@@ -169,7 +171,8 @@ void clearStrip()
 // Fill the strip with a solid color. This will update the strip.
 void fillStrip(ColorMap color) 
 {
-    for (uint32_t i = 0; i < NUM_LEDS; i++) 
+    uint32_t i = 0;
+    for (; i < NUM_LEDS; i++)
     {
         // set all LEDs to specified color
         setLEDColor(i, color);  
