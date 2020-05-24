@@ -5,13 +5,13 @@ filename: Project
 --- 
 
 # FourFace 
-FourFace integrates capacitive touch sensing into a four-player interactive game in the vein of the 80's electronic game, "Simon". In the game, a pattern of lights emits and each player tries to replicate. If they guess incorrectly, the player is eliminated. The patterns become increasingly complex with new each round,.   
+FourFace integrates capacitive touch sensing into a four-player interactive game in the vein of the 80's electronic game, "Simon". In the game, a pattern of lights emits and each player tries to replicate. If they guess incorrectly, the player is eliminated. The patterns become increasingly complex with new each round.   
 
 ![test!](https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/Documentation/Photos/pic.png?raw=true)
 
 ## Mechanical Design
 
-There are four ajacent sides on the cube that act as the interface for four players. CAD visualizes the framework, in order to create a rough and final prototype of the desired design.
+There are four adjacent sides on the cube that act as the interface for four players. CAD visualizes the framework, in order to create a rough and final prototype of the desired design.
 
 Four interfaces interlock on each of the cube's sides with 3D printed hooks to hold the sides firmly together. Each face consists of nine acrylic squares functioning as the physical interface. Each frame is 15x15 inches. Within each frame, there are nine 4x4 inch acrylic panels with capacitive sensing technology, ultimately acting as a "touch screen."
 
