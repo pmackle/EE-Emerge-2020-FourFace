@@ -7,7 +7,7 @@ filename: README
 # EE-Emerge 2020: Four Face
 
 
-FourFace is a capacitive touch, four player interactive game in the vein of the 80's electronic game, "Simon".  The basic premise of the game is a pattern of lights will emit for each player that they will then have to replicate. If they guess incorrectly, they will be eliminated. With each round the patterns will become increasingly complex.
+FourFace is a capacitive touch, four player interactive game in the vein of the 80's electronic game, "Simon".  The basic premise of the game is a pattern of lights will emit for each player that they will then have to replicate. If they guess incorrectly, they are eliminated. With each round the patterns become more complex
 
 ## Table of Contents
 
@@ -15,25 +15,19 @@ FourFace is a capacitive touch, four player interactive game in the vein of the 
 1. [Getting Started](#getting-started)
     1. [Dependencies](#dependencies)
     1. [Installation](#installation)
-    1. [Building](#building)
 1. [How to Get Help](#how-to-get-help)
 1. [Authors](#authors)
 1. [Acknowledgements](#acknowledgements)
 
 # About the Project
-FourFace is interactive memory game created by undergraduates from EE-Emerge, a group within the Department of Electrical and Computer 
-Engineering at the University of California, Davis. The premise of this game is to compete against three other people and imitate the 
-given pattern. As each round starts, the pattern becomes increasingly difficult. Once a person fails to imitate the given pattern, they 
-will be eliminated. Last person to survive the remaining rounds is crowned the winner. Some highlights worth mentioning are CapSense 
-technology, custom PCB's and mechanical design, and user friendliness.
+FourFace is a project developed during the 2019/2020 academic year by undergraduates from EE-Emerge a group within the Department of Electrical and Computer Engineering at the University of California, Davis. FourFace is interactive memory game where four players compete against one another by replicating randomly generated patterns. As the rounds increase, the patterns become more difficult. Once a person fails to imitate the given pattern, they are eliminated. Last person to survive the remaining rounds is crowned the winner. At the core of FourFace's technology is CapSense technology and custom PCBs.
 
-Here you can provide more details about the project
-What features does your project provide?
+
 Features:
 - CapSense Technology
 - Custom PCB's
 - 1-4 player game
-- Difficulty adjustment
+- Adjustable Difficulty
 - Portable
 The mechanical design for the project is composed of a 15x15in cube with 9 acrylic tiles that face each player.
 
@@ -41,17 +35,10 @@ Our motivation for the project was to put a creative, more modern spin on a simi
 
 [Our Hackster.io website](https://www.hackster.io/fourface/fourface-1bf273)
 
-```
-Show some example code to describe what your project does
-Show some of your APIs
-```
 
 **[Back to top](#table-of-contents)**
 
 # Getting Started
-
-This section should provide instructions for other developers to
-
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ## Dependencies
@@ -87,14 +74,6 @@ This will create a new root folder "EE-Emerge2020-FourFace" that will contain al
     1. Checkmark all projects
     1. Press Finish
 1. Build each project one by one
-
-## Building
-
-Instructions for how to build your project
-
-```
-Examples should be included
-```
 
 **[Back to top](#table-of-contents)**
 
