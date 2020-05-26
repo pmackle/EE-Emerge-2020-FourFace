@@ -15,6 +15,8 @@ ORDERED_OBJS += \
 "./Source/main.obj" \
 "./Source/structure.obj" \
 "./Source/ws2812.obj" \
+"./Source/UART/ring_buffer.obj" \
+"./Source/UART/uart.obj" \
 "../lnk_msp430g2533.cmd" \
 $(GEN_CMDS__FLAG) \
 -llibc.a \
@@ -28,8 +30,10 @@ RMDIR := RMDIR /S/Q
 -include sources.mk
 -include subdir_vars.mk
 -include Source/subdir_vars.mk
+-include Source/UART/subdir_vars.mk
 -include subdir_rules.mk
 -include Source/subdir_rules.mk
+-include Source/UART/subdir_rules.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -160,8 +164,8 @@ FaceFirmware\ -\ CCS.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "Source\CTS_HAL.obj" "Source\CTS_Layer.obj" "Source\main.obj" "Source\structure.obj" "Source\ws2812.obj" 
-	-$(RM) "Source\CTS_HAL.d" "Source\CTS_Layer.d" "Source\main.d" "Source\structure.d" "Source\ws2812.d" 
+	-$(RM) "Source\CTS_HAL.obj" "Source\CTS_Layer.obj" "Source\main.obj" "Source\structure.obj" "Source\ws2812.obj" "Source\UART\ring_buffer.obj" "Source\UART\uart.obj" 
+	-$(RM) "Source\CTS_HAL.d" "Source\CTS_Layer.d" "Source\main.d" "Source\structure.d" "Source\ws2812.d" "Source\UART\ring_buffer.d" "Source\UART\uart.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

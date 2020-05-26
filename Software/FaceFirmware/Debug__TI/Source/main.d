@@ -20,6 +20,7 @@ Source/main.obj: C:/ti/ccs1000/ccs/tools/compiler/ti-cgt-msp430_20.2.1.LTS/inclu
 Source/main.obj: ../Source/structure.h
 Source/main.obj: ../Source/CTS_Layer.h
 Source/main.obj: ../Source/CTS_HAL.h
+Source/main.obj: ../Source/UART/uart.h
 
 ../Source/main.c: 
 C:/ti/ccs1000/ccs/ccs_base/msp430/include/msp430.h: 
@@ -41,3 +42,4 @@ C:/ti/ccs1000/ccs/tools/compiler/ti-cgt-msp430_20.2.1.LTS/include/sys/_stdint.h:
 ../Source/structure.h: 
 ../Source/CTS_Layer.h: 
 ../Source/CTS_HAL.h: 
+../Source/UART/uart.h: 

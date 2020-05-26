@@ -49,44 +49,41 @@
  * Rev 1.0
  *
  */
-//1.0, 2.6, 1.4, 1.5, 2.1 2.2, 2.4, 1.6, 2.7
+//2.4, 2.7, 2.1, 1.6, 1.0, 1.4, 1.5, 2.2, 2.6
 //Changing 1.2 to 1.3 b/c 1.2 is being used for UART communication
 #include "structure.h"
 
-#define THRESHOLD (80)
-#define ACCUMULATION_CYCLES (150)
+#define THRESHOLD (300)
+#define ACCUMULATION_CYCLES (10)
 
 const struct Element buttonElement0 =
 {
-    .inputBits = BIT0,
-    .inputPxselRegister = (unsigned char *)&P1SEL,
-    .inputPxsel2Register = (unsigned char *)&P1SEL2,
-    .threshold = THRESHOLD //more sensitive= decrease #, less= incr
-
+    .inputBits = BIT4,
+    .inputPxselRegister = (unsigned char *)&P2SEL,
+    .inputPxsel2Register = (unsigned char *)&P2SEL2,
+    .threshold = THRESHOLD
 };
 
 const struct Element buttonElement1 =
 {
-    .inputBits = BIT6,
+    .inputBits = BIT7,
     .inputPxselRegister = (unsigned char *)&P2SEL,
     .inputPxsel2Register = (unsigned char *)&P2SEL2,
-    .threshold = THRESHOLD
-
+    .threshold = THRESHOLD //more sensitive= decrease #, less= incr
 };
 
 
 const struct Element buttonElement2 =
 {
-    .inputBits = BIT4,
-    .inputPxselRegister = (unsigned char *)&P1SEL,
-    .inputPxsel2Register = (unsigned char *)&P1SEL2,
-    .threshold = THRESHOLD
-
+    .inputBits = BIT1,
+    .inputPxselRegister = (unsigned char *)&P2SEL,
+    .inputPxsel2Register = (unsigned char *)&P2SEL2,
+    .threshold = THRESHOLD //more sensitive= decrease #, less= incr
 };
 
 const struct Element buttonElement3 =
 {
-    .inputBits = BIT5,
+    .inputBits = BIT6,
     .inputPxselRegister = (unsigned char *)&P1SEL,
     .inputPxsel2Register = (unsigned char *)&P1SEL2,
     .threshold = THRESHOLD
@@ -95,14 +92,31 @@ const struct Element buttonElement3 =
 
 const struct Element buttonElement4 =
 {
-    .inputBits = BIT1,
-    .inputPxselRegister = (unsigned char *)&P2SEL,
-    .inputPxsel2Register = (unsigned char *)&P2SEL2,
+    .inputBits = BIT0,
+    .inputPxselRegister = (unsigned char *)&P1SEL,
+    .inputPxsel2Register = (unsigned char *)&P1SEL2,
     .threshold = THRESHOLD
 
 };
 
 const struct Element buttonElement5 =
+{
+    .inputBits = BIT4,
+    .inputPxselRegister = (unsigned char *)&P1SEL,
+    .inputPxsel2Register = (unsigned char *)&P1SEL2,
+    .threshold = THRESHOLD //more sensitive= decrease #, less= incr
+
+};
+
+const struct Element buttonElement6 =
+{
+    .inputBits = BIT5,
+    .inputPxselRegister = (unsigned char *)&P1SEL,
+    .inputPxsel2Register = (unsigned char *)&P1SEL2,
+    .threshold = THRESHOLD
+};
+
+const struct Element buttonElement7 =
 {
     .inputBits = BIT2,
     .inputPxselRegister = (unsigned char *)&P2SEL,
@@ -111,31 +125,12 @@ const struct Element buttonElement5 =
 
 };
 
-const struct Element buttonElement6 =
-{
-    .inputBits = BIT4,
-    .inputPxselRegister = (unsigned char *)&P2SEL,
-    .inputPxsel2Register = (unsigned char *)&P2SEL2,
-    .threshold = THRESHOLD //more sensitive= decrease #, less= incr
-
-};
-
-const struct Element buttonElement7 =
-{
-    .inputBits = BIT6,
-    .inputPxselRegister = (unsigned char *)&P1SEL,
-    .inputPxsel2Register = (unsigned char *)&P1SEL2,
-    .threshold = THRESHOLD //more sensitive= decrease #, less= incr
-
-};
-
 const struct Element buttonElement8 =
 {
-    .inputBits = BIT7,
+    .inputBits = BIT6,
     .inputPxselRegister = (unsigned char *)&P2SEL,
     .inputPxsel2Register = (unsigned char *)&P2SEL2,
     .threshold = THRESHOLD //more sensitive= decrease #, less= incr
-
 };
 
 

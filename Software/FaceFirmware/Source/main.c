@@ -6,16 +6,25 @@
 #include "structure.h"
 #include "CTS_Layer.h"
 
+#include "UART/uart.h"
+//#include "ring_buffer.h"
 
-// void setColorsShowStrip(uint8_t square, ColorMap color);
+//Functions
+//LEDs
 void setColorsShowStrip(uint8_t square, ColorMap color);
-void UART_TX(char * tx_data);
-int uart_putchar(int c);
-int uart_getchar(void);
-
-// uint16_t runCapTouch(uint16_t prevResult);
-uint16_t runCapTouch();
+void receivePattern(void);
+void sendPattern(void);
+//Cap Touch Sensors
+int runCapTouch();
 void InitCapSenseButtons(void);
+//Communications
+void establishContact(void);
+void UART_TX(char * tx_data);
+//int uart_putchar(int c);
+//int uart_getchar(void);
+
+//CHECK_BIT(temp, n - 1) where n is bits from right
+#define CHECK_BIT(NUM,POS) ((NUM) & (0x1<<(POS)))
 
 #define LEDS_PER_SQUARE (NUM_LEDS/9)
 #define DELAY_100ms (800000)
@@ -40,23 +49,18 @@ typedef enum  ledStripPins
 ////////////////////////////////////////
 //SQUARE NUMBER LAYOUT BASED ON WIRING
 ////////////////////////////////////////
-//  G | F | E  |  6 | 5 | 4
-//  ---------  |  ---------
-//  H | C | D  |  7 | 2 | 3
-//  ---------  |  ---------
-//  I | B | A  |  8 | 1 | 0
+//  G | F | E  |  6 | 5 | 4  |  1.5 | 1.4 | 1.0
+//  ---------  |  ---------  |  ---------------
+//  H | C | D  |  7 | 2 | 3  |  2.2 | 2.1 | 1.6
+//  ---------  |  ---------  |  ---------------
+//  I | B | A  |  8 | 1 | 0  |  2.6 | 2.7 | 2.4
 
-uint8_t square = 0;
-uint8_t color = 0;
-uint8_t flag = 0;
-uint8_t trash = 0;
+//2.4, 2.7, 2.1, 1.6, 1.0, 1.4, 1.5, 2.2, 2.6
+
 uint8_t state = 0;
 uint8_t litSquares[9] = {0};
-const unsigned long MCLK_HZ = 16000000;          // SMCLK frequency in Hz
-const unsigned BPS = 9600;                       // ASYNC serial baud rate
 int main(void)
 {
-    const unsigned long baud_rate_20_bits = (MCLK_HZ + (BPS >> 1)) / BPS; // Bit rate divisor
     WDTCTL = WDTPW + WDTHOLD;  // Stop WDT
     if (CALBC1_16MHZ==0xFF)    // If calibration constant erased
     {
@@ -72,89 +76,37 @@ int main(void)
     P1SEL |= BIT1 + BIT2;                     // P1.1 = RXD, P1.2=TXD
     P1SEL2 |= BIT1 + BIT2;
 
-    // Configure USCI UART for 2400
-    UCA0CTL1 = UCSWRST;                             // Hold USCI in reset to allow configuration
-    UCA0CTL0 = 0;                                   // No parity, LSB first, 8 bits, one stop bit, UART (async)
-    UCA0BR1 = (baud_rate_20_bits >> 12) & 0xFF;     // High byte of whole divisor
-    UCA0BR0 = (baud_rate_20_bits >> 4) & 0xFF;      // Low byte of whole divisor
-    UCA0MCTL = ((baud_rate_20_bits << 4) & 0xF0) | UCOS16; // Fractional divisor, over sampling mode
-    UCA0CTL1 = UCSSEL_2;                            // Use SMCLK for bit rate generator, then release reset
-
-
+    /* Global interrupt enable */
+    __enable_interrupt();
     __bis_SR_register(GIE);
 
+    //Configure UART
+    uart_config_t config;
+    config.baud = 9600; //ASYNC serial baud rate
+    uart_init(&config);
 
     InitCapSenseButtons();
-    initStrip();  // ***** HAVE YOU SET YOUR NUM_LEDS DEFINE IN WS2812.H? ******
+    initStrip();
+    establishContact();
+    setColorsShowStrip(SQUARES_C, COLOR_BLUE);
 
-
-    fillStrip(COLOR_BLUE);
-    showStrip();
-    int byteReceived = 0;
-    while (!byteReceived) {
+    //Ready up
+//    while(!CHECK_BIT(runCapTouch(), SQUARES_C)) {
+    while(runCapTouch() != SQUARES_C) {
         __delay_cycles(300);
-        if (uart_getchar() == 'A') {
-            uart_putchar('A');
-            byteReceived = 1;
-             fillStrip(COLOR_RED);
-             showStrip();
-        }
     }
+    uart_putchar('R');
+    fillStrip(COLOR_OFF);
+    showStrip();
 
-    uint16_t capTouchValue = 0x0;
     while (1)
     {
-        __delay_cycles(DELAY_100ms);
-        fillStrip(COLOR_OFF);
-        showStrip();
-        capTouchValue = runCapTouch();
-        if (capTouchValue != 0x0) {
-            fillStrip(COLOR_GREEN);
-            showStrip();
-            __delay_cycles(50 * DELAY_100ms);
-        }
-        
-        //Receive 2 bytes from master designating square and color.
-        //First it receives the square, loops again and receives the color.
-//         if(uart_getchar() != -1)
-//         {
-//             if((state == 0) && !flag)
-//             {
-//                 square = UCA0RXBUF  - '0';
-//                 state = 1;
-//             }
-//             else if((state == 1) && !flag)
-//             {
-//                 color = UCA0RXBUF  - '0';
-//                 state = 0;
-//
-//                 switch(color)
-//                 {
-//                 case 0:
-//                     setColorsShowStrip(square, COLOR_OFF);
-//                     break;
-//                 case 1:
-//                     setColorsShowStrip(square, COLOR_RED);
-//                     break;
-//                 case 2:
-//                     setColorsShowStrip(square, COLOR_GREEN);
-//                     break;
-//                 default:
-//                     setColorsShowStrip(square, COLOR_BLUE);
-//                 }
-//                 flag = 0;
-//                 __delay_cycles(10 * DELAY_100ms);
-//                 //Send 'A' back to master signifying it is done displaying the square.
-//                 //The master will not continue sending data until it receives this char.
-//                 uart_putchar('A');
-//             }
-//         }
-
+        receivePattern();
+        sendPattern();
     }
 }
 
 
-// void setColorsShowStrip(uint16_t crntStates)
 void setColorsShowStrip(uint8_t square, ColorMap color)
 {
     clearStrip();
@@ -174,67 +126,168 @@ void setColorsShowStrip(uint8_t square, ColorMap color)
 }
 
 
-void UART_TX(char * tx_data) // Define a function which accepts a character pointer to an array
+void receivePattern(void)
 {
-    unsigned int i=0;
-    while(tx_data[i]) // Increment through array, look for null pointer (0) at end of string
+    int i = 0;
+    for (; i < 9; i++) {
+        litSquares[i] = 0;
+    }
+
+    int square = 0;
+    int color = 0;
+    int UARTStreamChar = -1;
+    while(1)
     {
-        while ((UCA0STAT & UCBUSY)); // Wait if line TX/RX module is busy with data
-        UCA0TXBUF = tx_data[i]; // Send out element i of tx_data array on UART bus
-        i++; // Increment variable for array address
+        UARTStreamChar = uart_getchar();
+        if(UARTStreamChar != -1)
+        {
+            if (UARTStreamChar == 'E') {
+                break;
+            }
+            else if((state == 0))
+            {
+                square = UARTStreamChar  - '0';
+                state = 1;
+            }
+            else if((state == 1))
+            {
+                color = UARTStreamChar  - '0';
+                state = 0;
+
+                switch(color)
+                {
+                case 0:
+                    setColorsShowStrip(square, COLOR_BLUE);
+                 break;
+                case 1:
+                    setColorsShowStrip(square, COLOR_RED);
+                    break;
+                case 2:
+                    setColorsShowStrip(square, COLOR_GREEN);
+                    break;
+                default:
+                    setColorsShowStrip(square, COLOR_OFF);
+                }
+                __delay_cycles(10 * DELAY_100ms);
+                uart_putchar('D');
+            }
+        }
     }
+    for (i = 0; i < 1; i++) { //1 second timer
+        __delay_cycles(10 * DELAY_100ms);
+    }
+    fillStrip(COLOR_BLUE);
+    showStrip();
+
+    for (i = 0; i < 1; i++) { //1 second timer
+     __delay_cycles(10 * DELAY_100ms);
+    }
+    clearStrip();
+    showStrip();
+    uart_putchar('D');
 }
 
 
-
-int uart_putchar(int c)
-{
-    /* Wait for the transmit buffer to be ready */
-    while (!(IFG2 & UCA0TXIFG));
-
-    /* Transmit data */
-    UCA0TXBUF = (char) c;
-
-    return 0;
-}
-
-
-
-int uart_getchar(void)
-{
-    int chr = -1;
-
-    if (IFG2 & UCA0RXIFG) {
-        chr = UCA0RXBUF;
+void sendPattern(void) {
+    //Clear lit square values
+    int i = 0;
+    for (; i < 9; i++) {
+        litSquares[i] = 0;
     }
 
-    return chr;
+
+    int capTouchValue = -1;
+    int UARTStreamChar = -1;
+    uint8_t square = 0;
+    uint8_t color = 0;
+    while(1) {
+        capTouchValue = runCapTouch();
+        if (capTouchValue != 0) {
+            uart_putchar('P');
+            uart_putchar(capTouchValue);
+
+            while(1)
+            {
+                UARTStreamChar = uart_getchar();
+                if(UARTStreamChar != -1)
+                {
+                    if((state == 0))
+                    {
+                        square = UARTStreamChar  - '0';
+                        state = 1;
+                    }
+                    else if((state == 1))
+                    {
+                        color = UARTStreamChar  - '0';
+                        state = 0;
+
+                        switch(color)
+                        {
+                        case 0:
+                            setColorsShowStrip(square, COLOR_BLUE);
+                         break;
+                        case 1:
+                            setColorsShowStrip(square, COLOR_RED);
+                            break;
+                        case 2:
+                            setColorsShowStrip(square, COLOR_GREEN);
+                            break;
+                        default:
+                            setColorsShowStrip(square, COLOR_OFF);
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        if (uart_getchar() == 'E')
+            break;
+    }
+    uart_putchar('D');
+    uart_putchar('R')
 }
 
 
-// uint16_t runCapTouch(uint16_t prevResult)
-uint16_t runCapTouch()
+int runCapTouch()
 {
-    // uint16_t result = prevResult;
-    uint16_t result = 0x0;
+    int result = 0;
     if (TI_CAPT_Button(&buttonSensor0))
-        result ^= (0x1 << SQUARES_A);
-    if (TI_CAPT_Button(&buttonSensor1))
-        result ^= (0x1 << SQUARES_B);
-    if (TI_CAPT_Button(&buttonSensor2))
-        result ^= (0x1 << SQUARES_C);
-    if (TI_CAPT_Button(&buttonSensor3))
-        result ^= (0x1 << SQUARES_D);
-    if (TI_CAPT_Button(&buttonSensor4))
-        result ^= (0x1 << SQUARES_E);
-    if (TI_CAPT_Button(&buttonSensor5))
-        result ^= (0x1 << SQUARES_F);
-    if (TI_CAPT_Button(&buttonSensor6))
-        result ^= (0x1 << SQUARES_G);
-    if (TI_CAPT_Button(&buttonSensor7))
-        result ^= (0x1 << SQUARES_H);
-    if (TI_CAPT_Button(&buttonSensor8))
-        result ^= (0x1 << SQUARES_I);
+        result = SQUARES_A;
+    else if (TI_CAPT_Button(&buttonSensor1))
+        result = SQUARES_B;
+    else if (TI_CAPT_Button(&buttonSensor2))
+        result = SQUARES_C;
+    else if (TI_CAPT_Button(&buttonSensor3))
+        result = SQUARES_D;
+    else if (TI_CAPT_Button(&buttonSensor4))
+        result = SQUARES_E;
+    else if (TI_CAPT_Button(&buttonSensor5))
+        result = SQUARES_F;
+    else if (TI_CAPT_Button(&buttonSensor6))
+        result = SQUARES_G;
+    else if (TI_CAPT_Button(&buttonSensor7))
+        result = SQUARES_H;
+    else if (TI_CAPT_Button(&buttonSensor8))
+        result = SQUARES_I;
+
+//    if (TI_CAPT_Button(&buttonSensor0))
+//        result ^= (0x1 << SQUARES_A);
+//    else if (TI_CAPT_Button(&buttonSensor1))
+//        result ^= (0x1 << SQUARES_B);
+//    else if (TI_CAPT_Button(&buttonSensor2))
+//        result ^= (0x1 << SQUARES_C);
+//    else if (TI_CAPT_Button(&buttonSensor3))
+//        result ^= (0x1 << SQUARES_D);
+//    else if (TI_CAPT_Button(&buttonSensor4))
+//        result ^= (0x1 << SQUARES_E);
+//    else if (TI_CAPT_Button(&buttonSensor5))
+//        result ^= (0x1 << SQUARES_F);
+//    else if (TI_CAPT_Button(&buttonSensor6))
+//        result ^= (0x1 << SQUARES_G);
+//    else if (TI_CAPT_Button(&buttonSensor7))
+//        result ^= (0x1 << SQUARES_H);
+//    else if (TI_CAPT_Button(&buttonSensor8))
+//        result ^= (0x1 << SQUARES_I);
     return result;
 }
 
@@ -261,4 +314,17 @@ void InitCapSenseButtons(void)
     TI_CAPT_Init_Baseline(&buttonSensor8);
     TI_CAPT_Update_Baseline(&buttonSensor8, 10);
     TI_CAPT_Update_Tracking_Rate(TRIDOI_VSLOW | TRADOI_FAST);   // Set baseline update rate to VSLOW in direction of interest
+}
+
+
+void establishContact(void)
+{
+    int byteReceived = 0;
+    while (!byteReceived) {
+        if (uart_getchar() == 'R') {
+            byteReceived = 1;
+            uart_putchar('R');
+        }
+    }
+//    uart_clearStream();
 }

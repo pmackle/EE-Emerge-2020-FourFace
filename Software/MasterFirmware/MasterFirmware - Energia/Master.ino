@@ -34,14 +34,25 @@ typedef enum  ledStripPins
     NUM_SQUARES
 } squareNames;
 
+typedef enum  colors
+{
+    COLOR_BLUE,
+    COLOR_RED,
+    COLOR_GREEN,
+    COLOR_OFF
+} LEDColors;
+
 //Functions
+//Communications
+void establishContact();
+void delayUntil(char c);
+//Game
 void startGame(int totalRoundCount, int initialSquareCount); //Round time in ms
 void initializePlayer(Player *player);
 int* generatePattern(const int sequenceLength); //Returns new pattern. Should only be called from newRound();
 int* newRound(const int sequenceLength); 
 void displayPattern(int* roundPattern, int sequenceLength);
-void sendSquareColor(uint16_t squareAndColor);
-void sendSquareColor2(uint8_t square, uint8_t color);
+void receiveComparePattern(int* roundPattern, int sequenceLength);
 
 
 //Globals
@@ -62,6 +73,7 @@ uint16_t pressedPlate = 0;
 // the setup routine runs once when you press reset:
 void setup() {                
     Serial1.begin(9600); 
+    randomSeed(analogRead(0));
     establishContact(); // send a byte to establish contact until receiver responds 
     
     startGame(5, 5);
@@ -80,16 +92,29 @@ void setup() {
 //////////////////////////////
 int i = 0;
 void loop() {
-    displayPattern(generatePattern(6), 6);
+    while (Serial1.read() != 'R') { //Wait for each player to ready up
+        delay(300);
+    }
+    int sequenceLength = game.initialSquareCount + game.crntRound;
+    int* pattern = newRound(sequenceLength);
+    receiveComparePattern(pattern, sequenceLength);
 }
 
 
 //Ensures connection to slave is good
 void establishContact() {
-  while (Serial1.read() != 'A') {
-    Serial1.print('A'); // send a capital A
+  while (Serial1.read() != 'R') {
+    Serial1.print('R');
     delay(300);
   }
+}
+
+
+//Loop until a char is received from UART stream
+void delayUntil(char c) {
+    while (Serial1.read() != c) {
+        delay(300);
+    }
 }
 
 
@@ -117,8 +142,10 @@ int* generatePattern(const int sequenceLength)
     //Allocate a block of memory the length of sequenceLength with each block large enough for an int
     newPattern = (int*)calloc(sequenceLength, sizeof(int));
     int i;
-    for (i = 0; i < sequenceLength; i++)
-        *(newPattern + i) = (rand() % (SQUARES_I - SQUARES_A + 1)) + SQUARES_A;
+    for (i = 0; i < sequenceLength; i++) {
+//        *(newPattern + i) = (rand() % (SQUARES_I - SQUARES_A + 1)) + SQUARES_A;
+            *(newPattern + i) = random(SQUARES_A, SQUARES_I + 1);
+    }
     return newPattern;
 }
 
@@ -135,19 +162,36 @@ int* newRound(const int sequenceLength)
 void displayPattern(int* roundPattern, int sequenceLength)
 {
     uint8_t square = 0;
-    uint8_t color = 3; //blue
     int i = 0;
     for (; i < sequenceLength; i++)
     {
         square = roundPattern[i];
         Serial1.print(square);
-        Serial1.print(color);
-        while (Serial1.read() != 'A') {}
+        Serial1.print(COLOR_BLUE);
     }
-    // for (i = 0; i < 2; i++) //2 second timer
-    //     __delay_cycles(10 * DELAY_100ms);
-    // fillStrip(2);
-    // for (i = 0; i < 1; i++) //1 second timer
-    //     __delay_cycles(10 * DELAY_100ms);
-    // clearStrip();
+    Serial1.print('E');
+    delayUntil('D');
+}
+
+void receiveComparePattern(int* roundPattern, int sequenceLength) {
+    int pressedSquare;
+    int i = 0;
+    for (; i < sequenceLength; i++) {
+        delayUntil('P');
+        pressedSquare = Serial1.read();
+        if (pressedSquare == roundPattern[i]) {
+            Serial1.print(pressedSquare);
+            Serial1.print(COLOR_GREEN);
+            //Send player not eliminated
+            player1->score++;
+        }
+        else {
+            Serial1.print(pressedSquare);
+            Serial1.print(COLOR_RED);
+            //Send player eliminated
+            player1->eliminated = true;
+        }
+    }
+    Serial1.print('E');
+    delayUntil('D');
 }
