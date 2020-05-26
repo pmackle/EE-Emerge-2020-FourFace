@@ -15,6 +15,12 @@ All of the mechanical design was done through Autodesk Fusion 360. Fourface is a
 
 Each frame has four layers, each with their own specific mechanical function. The first layer and second layer stack such that acrylic tiles can be placed securely on each face. The next layer has bigger holes so as allow for the LED strip to sit flush with the top layers. The final layer allows for cleaner wiring in a specific order.
 
+
+![firstsecond!](https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/Documentation/Photos/everything.png?raw=true)
+
+
+
+
 ## Software Design 
 
 The project consists of four Texas Instruments' MSP430 and one MSP432 Launchpad. We use Universal Asynchronous Receiver/Transmitter (UART) Communication, allowing the communication between the master (MSP432) and slaves (MSP430). The master launchpad creates a random pattern and sends the pattern to the slaves. Once the pattern is received, the slaves display the pattern for the player to irepeat.
