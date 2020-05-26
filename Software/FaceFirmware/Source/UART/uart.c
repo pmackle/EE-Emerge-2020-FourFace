@@ -45,11 +45,6 @@ struct baud_value
     uint16_t UCAxMCTL;
 };
 
-/* Table of baud rate register values from reference manual (SLAU144) */
-static const struct baud_value _baud_tbl[] = {
-    {9600, 104, 0, 0x2}
-};
-
 /* RX ring bufer */
 static rbd_t _rbd;
 static char _rbmem[8];
@@ -59,56 +54,30 @@ static char _rbmem[8];
  * \param[in] config - the UART configuration
  * \return 0 on success, -1 otherwise
  */
-int uart_init(uart_config_t *config)
+void uart_init(void)
 {
     const unsigned long MCLK_HZ = 16000000;          // SMCLK frequency in Hz
     const unsigned BPS = 9600;                       // ASYNC serial baud rate
     const unsigned long baud_rate_20_bits = (MCLK_HZ + (BPS >> 1)) / BPS; // Bit rate divisor
-    int status = -1;
 
-    /* USCI should be in reset before configuring - only configure once */
-    if (UCA0CTL1 & UCSWRST) {
-        // Configure USCI UART for 2400
-        UCA0CTL1 = UCSWRST;                             // Hold USCI in reset to allow configuration
-        UCA0CTL0 = 0;                                   // No parity, LSB first, 8 bits, one stop bit, UART (async)
-        UCA0BR1 = (baud_rate_20_bits >> 12) & 0xFF;     // High byte of whole divisor
-        UCA0BR0 = (baud_rate_20_bits >> 4) & 0xFF;      // Low byte of whole divisor
-        UCA0MCTL = ((baud_rate_20_bits << 4) & 0xF0) | UCOS16; // Fractional divisor, over sampling mode
-        UCA0CTL1 = UCSSEL_2;                            // Use SMCLK for bit rate generator, then release reset
-//        size_t i;
-//
-//        /* Set clock source to SMCLK */
-//        UCA0CTL1 |= UCSSEL_2;
-//
-//        /* Find the settings from the baud rate table */
-//        for (i = 0; i < ARRAY_SIZE(_baud_tbl); i++) {
-//            if (_baud_tbl[i].baud == config->baud) {
-//                break;
-//            }
-//        }
+    // Configure USCI UART for 2400
+    UCA0CTL1 = UCSWRST;                             // Hold USCI in reset to allow configuration
+    UCA0CTL0 = 0;                                   // No parity, LSB first, 8 bits, one stop bit, UART (async)
+    UCA0BR1 = (baud_rate_20_bits >> 12) & 0xFF;     // High byte of whole divisor
+    UCA0BR0 = (baud_rate_20_bits >> 4) & 0xFF;      // Low byte of whole divisor
+    UCA0MCTL = ((baud_rate_20_bits << 4) & 0xF0) | UCOS16; // Fractional divisor, over sampling mode
+    UCA0CTL1 = UCSSEL_2;                            // Use SMCLK for bit rate generator, then release reset
 
-//        if (i < ARRAY_SIZE(_baud_tbl)) {
-            rb_attr_t attr = {sizeof(_rbmem[0]), ARRAY_SIZE(_rbmem), _rbmem};
+    rb_attr_t attr = {sizeof(_rbmem[0]), ARRAY_SIZE(_rbmem), _rbmem};
 
-            /* Set the baud rate */
-//            UCA0BR0 = _baud_tbl[i].UCAxBR0;
-//            UCA0BR1 = _baud_tbl[i].UCAxBR1;
-//            UCA0MCTL = _baud_tbl[i].UCAxMCTL;
-                           
-            /* Initialize the ring buffer */
-            if (ring_buffer_init(&_rbd, &attr) == 0) {                 
-                /* Enable the USCI peripheral (take it out of reset) */
-                UCA0CTL1 &= ~UCSWRST;
+    /* Initialize the ring buffer */
+    if (ring_buffer_init(&_rbd, &attr) == 0) {
+        /* Enable the USCI peripheral (take it out of reset) */
+        UCA0CTL1 &= ~UCSWRST;
 
-                /* Enable rx interrupts */
-                IE2 |= UCA0RXIE;
-
-                status = 0;
-            }
-//        }
+        /* Enable rx interrupts */
+        IE2 |= UCA0RXIE;
     }
-
-    return status;
 }
 
 /**

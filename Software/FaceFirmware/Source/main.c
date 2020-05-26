@@ -7,21 +7,20 @@
 #include "CTS_Layer.h"
 
 #include "UART/uart.h"
-//#include "ring_buffer.h"
 
 //Functions
 //LEDs
-void setColorsShowStrip(uint8_t square, ColorMap color);
+void setColorsShowStrip(uint8_t square, uint8_t color);
 void receivePattern(void);
 void sendPattern(void);
+void resetLITSquares(void);
 //Cap Touch Sensors
 int runCapTouch();
 void InitCapSenseButtons(void);
 //Communications
 void establishContact(void);
 void UART_TX(char * tx_data);
-//int uart_putchar(int c);
-//int uart_getchar(void);
+void flashColor(ColorMap color);
 
 //CHECK_BIT(temp, n - 1) where n is bits from right
 #define CHECK_BIT(NUM,POS) ((NUM) & (0x1<<(POS)))
@@ -68,7 +67,6 @@ int main(void)
     }
     DCOCTL = 0; // Select lowest DCOx and MODx
     // configure clock to 16 MHz
-    // clk cycle = 62.5ns
     BCSCTL1 = CALBC1_16MHZ;    // DCO = 16 MHz
     DCOCTL = CALDCO_16MHZ;
     
@@ -80,42 +78,69 @@ int main(void)
     __enable_interrupt();
     __bis_SR_register(GIE);
 
-    //Configure UART
-    uart_config_t config;
-    config.baud = 9600; //ASYNC serial baud rate
-    uart_init(&config);
-
+    uart_init();
     InitCapSenseButtons();
     initStrip();
     establishContact();
     setColorsShowStrip(SQUARES_C, COLOR_BLUE);
 
     //Ready up
-//    while(!CHECK_BIT(runCapTouch(), SQUARES_C)) {
     while(runCapTouch() != SQUARES_C) {
         __delay_cycles(300);
     }
+    flashColor(COLOR_BLUE);
     uart_putchar('R');
-    fillStrip(COLOR_OFF);
-    showStrip();
 
+    int UARTStreamChar;
     while (1)
     {
-        receivePattern();
-        sendPattern();
+        UARTStreamChar = uart_getchar();
+        if (UARTStreamChar != -1) {
+            if (UARTStreamChar == 'R') {
+                continue;
+            }
+            else if (UARTStreamChar == 'N') {
+                receivePattern();
+                sendPattern();
+            }
+            else if (UARTStreamChar == 'W') {
+                fillStrip(COLOR_GREEN);
+                showStrip();
+                while(1){};
+            }
+            else if (UARTStreamChar == 'L') {
+                fillStrip(COLOR_RED);
+                showStrip();
+                while(1){};
+            }
+        }
     }
 }
 
 
-void setColorsShowStrip(uint8_t square, ColorMap color)
+void setColorsShowStrip(uint8_t square, uint8_t colorNum)
 {
-    clearStrip();
+    ColorMap color;
+    switch(colorNum)
+    {
+    case 0:
+        color = COLOR_OFF;
+        break;
+    case 1:
+        color = COLOR_RED;
+        break;
+    case 2:
+        color = COLOR_GREEN;
+        break;
+    case 3:
+        color = COLOR_BLUE;
+    }
+
     ColorMap currentColor = COLOR_OFF;
     //Toggle passed square
     litSquares[square] = !litSquares[square];
     int k = 0;
-    int i = 0;
-    for (; i < NUM_SQUARES; i++) {
+    for (i = NUM_SQUARES; i > 0; i--) {
         currentColor = COLOR_OFF;
         if (litSquares[i])
             currentColor = color;
@@ -128,76 +153,45 @@ void setColorsShowStrip(uint8_t square, ColorMap color)
 
 void receivePattern(void)
 {
-    int i = 0;
-    for (; i < 9; i++) {
-        litSquares[i] = 0;
-    }
+    resetLITSquares();
 
-    int square = 0;
-    int color = 0;
-    int UARTStreamChar = -1;
-    while(1)
+    int square = -1;
+    int color = -1;
+    int state = 0;
+    int UARTStreamChar = uart_getchar();
+    do
     {
-        UARTStreamChar = uart_getchar();
         if(UARTStreamChar != -1)
         {
-            if (UARTStreamChar == 'E') {
-                break;
-            }
-            else if((state == 0))
+            if(state == 0)
             {
                 square = UARTStreamChar  - '0';
                 state = 1;
             }
-            else if((state == 1))
+            else if(state == 1)
             {
                 color = UARTStreamChar  - '0';
                 state = 0;
-
-                switch(color)
-                {
-                case 0:
-                    setColorsShowStrip(square, COLOR_BLUE);
-                 break;
-                case 1:
-                    setColorsShowStrip(square, COLOR_RED);
-                    break;
-                case 2:
-                    setColorsShowStrip(square, COLOR_GREEN);
-                    break;
-                default:
-                    setColorsShowStrip(square, COLOR_OFF);
+                setColorsShowStrip(square, color);
+                for (i = 1; i > 0; i--) {
+                    __delay_cycles(10 * DELAY_100ms);
                 }
-                __delay_cycles(10 * DELAY_100ms);
                 uart_putchar('D');
             }
         }
-    }
-    for (i = 0; i < 1; i++) { //1 second timer
-        __delay_cycles(10 * DELAY_100ms);
-    }
-    fillStrip(COLOR_BLUE);
-    showStrip();
-
-    for (i = 0; i < 1; i++) { //1 second timer
-     __delay_cycles(10 * DELAY_100ms);
-    }
-    clearStrip();
-    showStrip();
+        UARTStreamChar = uart_getchar();
+    } while (UARTStreamChar != 'E');
+    flashColor(COLOR_BLUE);
     uart_putchar('D');
 }
 
 
 void sendPattern(void) {
-    //Clear lit square values
-    int i = 0;
-    for (; i < 9; i++) {
-        litSquares[i] = 0;
-    }
-
+    resetLITSquares();
 
     int capTouchValue = -1;
     int UARTStreamChar = -1;
+    uint8_t playerLoses = 0;
     uint8_t square = 0;
     uint8_t color = 0;
     while(1) {
@@ -211,29 +205,18 @@ void sendPattern(void) {
                 UARTStreamChar = uart_getchar();
                 if(UARTStreamChar != -1)
                 {
-                    if((state == 0))
+                    if (state == 0)
                     {
                         square = UARTStreamChar  - '0';
                         state = 1;
                     }
-                    else if((state == 1))
+                    else if (state == 1)
                     {
                         color = UARTStreamChar  - '0';
                         state = 0;
-
-                        switch(color)
-                        {
-                        case 0:
-                            setColorsShowStrip(square, COLOR_BLUE);
-                         break;
-                        case 1:
-                            setColorsShowStrip(square, COLOR_RED);
-                            break;
-                        case 2:
-                            setColorsShowStrip(square, COLOR_GREEN);
-                            break;
-                        default:
-                            setColorsShowStrip(square, COLOR_OFF);
+                        setColorsShowStrip(square, color);
+                        if (color == COLOR_RED) {
+                            playerLoses = 1;
                         }
                         break;
                     }
@@ -243,8 +226,18 @@ void sendPattern(void) {
         if (uart_getchar() == 'E')
             break;
     }
+    if (!playerLoses) {
+        flashColor(COLOR_GREEN);
+    }
     uart_putchar('D');
-    uart_putchar('R')
+}
+
+
+void resetLITSquares(void)
+{
+    for (i = 9; i > 0; i--) {
+        litSquares[i] = 0;
+    }
 }
 
 
@@ -269,25 +262,6 @@ int runCapTouch()
         result = SQUARES_H;
     else if (TI_CAPT_Button(&buttonSensor8))
         result = SQUARES_I;
-
-//    if (TI_CAPT_Button(&buttonSensor0))
-//        result ^= (0x1 << SQUARES_A);
-//    else if (TI_CAPT_Button(&buttonSensor1))
-//        result ^= (0x1 << SQUARES_B);
-//    else if (TI_CAPT_Button(&buttonSensor2))
-//        result ^= (0x1 << SQUARES_C);
-//    else if (TI_CAPT_Button(&buttonSensor3))
-//        result ^= (0x1 << SQUARES_D);
-//    else if (TI_CAPT_Button(&buttonSensor4))
-//        result ^= (0x1 << SQUARES_E);
-//    else if (TI_CAPT_Button(&buttonSensor5))
-//        result ^= (0x1 << SQUARES_F);
-//    else if (TI_CAPT_Button(&buttonSensor6))
-//        result ^= (0x1 << SQUARES_G);
-//    else if (TI_CAPT_Button(&buttonSensor7))
-//        result ^= (0x1 << SQUARES_H);
-//    else if (TI_CAPT_Button(&buttonSensor8))
-//        result ^= (0x1 << SQUARES_I);
     return result;
 }
 
@@ -327,4 +301,24 @@ void establishContact(void)
         }
     }
 //    uart_clearStream();
+}
+
+void flashColor(ColorMap color)
+{
+//    clearStrip();
+//    showStrip();
+
+    for (i = 1; i > 0; i--) {
+        __delay_cycles(5 * DELAY_100ms);
+    }
+
+    fillStrip(color);
+    showStrip();
+
+    for (i = 1; i > 0; i--) {
+        __delay_cycles(10 * DELAY_100ms);
+    }
+
+    clearStrip();
+    showStrip();
 }

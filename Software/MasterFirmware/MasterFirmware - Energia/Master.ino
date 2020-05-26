@@ -36,10 +36,11 @@ typedef enum  ledStripPins
 
 typedef enum  colors
 {
-    COLOR_BLUE,
+    COLOR_OFF,
     COLOR_RED,
     COLOR_GREEN,
-    COLOR_OFF
+    COLOR_BLUE,
+    NUM_COLOR
 } LEDColors;
 
 //Functions
@@ -73,10 +74,10 @@ uint16_t pressedPlate = 0;
 // the setup routine runs once when you press reset:
 void setup() {                
     Serial1.begin(9600); 
-    randomSeed(analogRead(0));
+    randomSeed(analogRead(A15));
     establishContact(); // send a byte to establish contact until receiver responds 
     
-    startGame(5, 5);
+    startGame(3, 1);
     player1 = (Player*)malloc(sizeof(Player));
     player2 = (Player*)malloc(sizeof(Player));
     player3 = (Player*)malloc(sizeof(Player));
@@ -90,14 +91,30 @@ void setup() {
 //////////////////////////////
 //MAIN FUNCTION
 //////////////////////////////
-int i = 0;
+unsigned i = 0;
 void loop() {
-    while (Serial1.read() != 'R') { //Wait for each player to ready up
-        delay(300);
+    delayUntil('R');
+
+    int sequenceLength = 0;
+    int* pattern;
+    for (i = game.totalRoundCount; i > 0 && !player1->eliminated; i--) {
+        Serial1.print('N');
+//        if ((*pattern) != 0) {
+//            free(pattern);
+//        }
+        sequenceLength = game.initialSquareCount + game.crntRound;
+        pattern = newRound(sequenceLength);
+        receiveComparePattern(pattern, sequenceLength);
     }
-    int sequenceLength = game.initialSquareCount + game.crntRound;
-    int* pattern = newRound(sequenceLength);
-    receiveComparePattern(pattern, sequenceLength);
+
+    if (!player1->eliminated) {
+        Serial1.print('W');
+        while(1) {};
+    }
+    else {
+        Serial1.print('L');
+        while(1) {};
+    }
 }
 
 
@@ -168,6 +185,7 @@ void displayPattern(int* roundPattern, int sequenceLength)
         square = roundPattern[i];
         Serial1.print(square);
         Serial1.print(COLOR_BLUE);
+        delayUntil('D');
     }
     Serial1.print('E');
     delayUntil('D');
@@ -176,19 +194,17 @@ void displayPattern(int* roundPattern, int sequenceLength)
 void receiveComparePattern(int* roundPattern, int sequenceLength) {
     int pressedSquare;
     int i = 0;
-    for (; i < sequenceLength; i++) {
+    for (; i < sequenceLength && !player1->eliminated; i++) {
         delayUntil('P');
         pressedSquare = Serial1.read();
         if (pressedSquare == roundPattern[i]) {
             Serial1.print(pressedSquare);
             Serial1.print(COLOR_GREEN);
-            //Send player not eliminated
             player1->score++;
         }
         else {
             Serial1.print(pressedSquare);
             Serial1.print(COLOR_RED);
-            //Send player eliminated
             player1->eliminated = true;
         }
     }

@@ -42,7 +42,7 @@ typedef struct
  * \param[in] config - the UART configuration
  * \return 0 on success, -1 otherwise
  */
-int uart_init(uart_config_t *config);
+void uart_init(void);
 
 /**
  * \brief Read a character from UART
