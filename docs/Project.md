@@ -16,7 +16,7 @@ All of the mechanical design was done through Autodesk Fusion 360. Fourface is a
 Each frame has four layers, each with their own specific mechanical function. The first layer and second layer stack such that acrylic tiles can be placed securely on each face. The next layer has bigger holes so as allow for the LED strip to sit flush with the top layers. The final layer allows for cleaner wiring in a specific order.
 
 
-![firstsecond!](https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/Documentation/Photos/everything.png?raw=true)
+![firstsecond!](https://github.com/pmackle/EE-Emerge-2020-FourFace/blob/master/Documentation/Photos/everything2.png?raw=true)
 
 
 
